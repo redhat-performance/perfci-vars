@@ -1,0 +1,122 @@
+dfg_rally_name: neutron
+enabled: true
+type: rally
+rally_deployment: overcloud
+concurrency: [2, 5]
+times: 10
+scenarios:
+ - name: create-list-network
+   enabled: true
+   file: rally/neutron/neutron-create-list-network-cc.yml
+   params:
+    sla_avg_list_networks: 15
+    concurrency: [15]
+    times: 500
+
+ - name: create-list-subnet
+   enabled: true
+   params:
+    subnets_per_network: 2
+    times: 40
+    concurrency: [20]
+   file: rally/neutron/neutron-create-list-subnet-cc.yml
+
+ - name: create-list-router
+   enabled: true
+   file: rally/neutron/neutron-create-list-router-cc.yml
+   params:
+    network_create_args: {}
+    subnet_create_args: {}
+    subnet_cidr_start: "1.1.0.0/30"
+    subnets_per_network: 2
+    router_create_args: {}
+    times: 40
+    concurrency: [20]
+ - name: create-list-port
+   enabled: true
+   file: rally/neutron/neutron-create-list-port-cc.yml
+   params:
+    times: 8
+    concurrency: [4]
+    network_create_args: {}
+    port_create_args: {}
+    ports_per_network: 50
+    sla_avg_list_ports: 15
+    sla_max_failure: 0
+
+ - name: create-list-trunks
+   enabled: true
+   params:
+    subport_count: 125
+    times: 4
+    concurrency: [4]
+   file: rally/neutron/neutron-create-list-trunks.yml
+
+ - name: create-list-security-group
+   enabled: true
+   file: rally/neutron/neutron-create-list-security-group-cc.yml
+   params:
+    times: 50
+    concurrency: [10]
+
+ - name: boot-server-with-subports
+   enabled: true
+   params:
+     flavor_name: m1.small
+     image_name: centos7
+     subport_count: 10
+   file: rally/neutron/neutron-boot-server-with-subports.yml
+
+ - name: boot-server-and-add-subports
+   enabled: true
+   params:
+     flavor_name: m1.small
+     image_name: centos7
+     subport_count: 10
+   file: rally/neutron/neutron-boot-server-and-add-subports.yml
+
+ - name: boot-server-and-batch-add-subports
+   enabled: true
+   params:
+     flavor_name: m1.small
+     image_name: centos7
+     subports_per_batch: 10
+     batches: 5
+   file: rally/neutron/neutron-boot-server-and-batch-add-subports.yml
+
+
+ - name: netcreate-boot
+   enabled: true
+   file: rally/rally-plugins/netcreate-boot/netcreate_nova_boot.yml
+   params:
+    enable_dhcp: true
+    image_name: cirros
+    flavor_name: m1.tiny
+
+ - name: netcreate-boot-one-network
+   enabled: true
+   file: rally/rally-plugins/netcreate-boot/netcreate_nova_boot_vms_on_single_network.yml
+   params:
+    enable_dhcp: true
+    num_vms: 4
+    image_name: cirros
+    flavor_name: m1.tiny
+
+ - name: netcreate-boot-ping
+   enabled: true
+   file: rally/rally-plugins/netcreate-boot/netcreate_nova_boot_fip_ping.yml
+   params:
+    num_vms: 4
+    image_name: cirros
+    flavor_name: m1.xtiny
+    ext_net_id:
+
+ - name: router-subnet-create-delete
+   enabled: true
+   file: rally/rally-plugins/neutron/router_subnet_create_delete.yml
+   params:
+    num_networks:  5
+
+ - name: neutron-securitygroup-port
+   enabled: true
+   file: rally/rally-plugins/neutron/securitygroup_port.yml
