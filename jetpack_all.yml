@@ -129,4 +129,4 @@ vm_image_url: https://url.corp.redhat.com/rhel-guest-image-7-6-210-x86-64-qcow2
 #neutron_backend: ovn
 #
 #Enable Openshift on openstack
-shift-stack: false
+shift_stack: false
