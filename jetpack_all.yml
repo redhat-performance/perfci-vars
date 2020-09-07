@@ -130,3 +130,4 @@ vm_image_url:
 #
 #Enable Openshift on openstack
 shift_stack: false
+novaless_prov: false
