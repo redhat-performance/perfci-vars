@@ -85,7 +85,7 @@ inspection_iprange: 192.168.24.110,192.168.24.250
 external_gateway: 172.17.5.1/24
 external_network_broadcast: 172.17.5.255
 external_network_vlan_id: 10
-clean_debug: False
+clean_nodes: False
 #adding changes 
 external_net_cidr: 172.17.5.0/24
 external_allocation_pools_start: 172.17.5.50
