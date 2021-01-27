@@ -132,6 +132,7 @@ vm_image_url:
 shift_stack: false
 novaless_prov: false
 new_nodes_instack: "{{ playbook_dir }}/newnodes.json"
+vlan_provider_network: false
 
 # This feature creates VMs on hypervisors and uses them as overcloud
 # compute nodes to simulate overcloud scale deployment. This feature
